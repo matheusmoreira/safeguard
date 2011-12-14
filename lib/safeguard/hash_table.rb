@@ -6,19 +6,19 @@ module Safeguard
   # Holds filename => checksum pairs.
   class HashTable
 
-    # Initializes an empty +HashTable+.
+    # Initializes an empty HashTable.
     def initialize
       @table = {}
     end
 
-    # Saves the +HashTable+ to a YAML file.
+    # Saves the HashTable to a YAML file.
     def save(filename)
       File.open("#{filename}.yaml", 'w') do |file|
         file.puts to_yaml
       end
     end
 
-    # Loads the +HashTable+ from a YAML file.
+    # Loads the HashTable from a YAML file.
     def self.load(filename)
       YAML::load_file "#{filename}.yaml"
     end

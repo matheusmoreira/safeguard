@@ -8,7 +8,7 @@ module Safeguard
     # Name of the directory in which the Safeguard repository resides.
     DIRECTORY_NAME = '.safeguard'.freeze
 
-    # Name of the file to which the +HashTable+ is saved.
+    # Name of the file to which the HashTable is saved.
     HASH_TABLE_FILE_NAME = 'hash_table'.freeze
 
     attr_accessor :directory
@@ -17,7 +17,7 @@ module Safeguard
     # Initializes a Safeguard repository in or from the given directory.
     #
     # If the given directory does not contain a repository directory, whose name
-    # is defined by the +DIRECTORY_NAME+ constant, it will be created.
+    # is defined by the DIRECTORY_NAME constant, it will be created.
     def initialize(dir)
       self.directory = Repository.directory_in(dir)
       FileUtils.mkdir_p directory
@@ -28,7 +28,7 @@ module Safeguard
       HashTable.load hash_table_file_name rescue HashTable.new
     end
 
-    # Returns the name of the +HashTable+ file relative to this repository.
+    # Returns the name of the HashTable file relative to this repository.
     def hash_table_file_name
       File.join directory, HASH_TABLE_FILE_NAME
     end
