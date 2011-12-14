@@ -1,8 +1,7 @@
 #!/usr/bin/env ruby
 require 'safeguard'
 
-puts 'No files specified' or exit if ARGV.empty?
+puts 'No command given' or exit if ARGV.empty?
 
-ARGV.each do |filename|
-  puts "#{Safeguard.file filename} => #{filename}"
-end
+command = ARGV.shift
+Safeguard.run(command, *ARGV)

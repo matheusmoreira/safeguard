@@ -1,9 +1,9 @@
-require 'safeguard/digest'
+require 'safeguard/command'
 
 module Safeguard
 
-  def self.file(filename)
-    Digest.file filename
+  def self.run(command, *args)
+    Command.invoke(command, *args)
   end
 
 end
