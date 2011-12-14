@@ -17,5 +17,6 @@ module Safeguard
       end
 
     end
+
   end
 end
