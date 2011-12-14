@@ -29,3 +29,5 @@ module Safeguard
 
   end
 end
+
+require 'safeguard/command/hash'
