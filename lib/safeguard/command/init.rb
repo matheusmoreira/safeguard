@@ -1,3 +1,4 @@
+require 'safeguard/command'
 require 'safeguard/repository'
 require 'fileutils'
 
