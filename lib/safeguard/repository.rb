@@ -4,6 +4,7 @@ module Safeguard
     DIRECTORY_NAME = '.safeguard'.freeze
 
     attr_accessor :directory
+    alias :dir :directory
 
     def initialize(dir)
       self.directory = Repository.directory_in(dir)

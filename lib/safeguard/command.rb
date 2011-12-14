@@ -31,3 +31,4 @@ module Safeguard
 end
 
 require 'safeguard/command/hash'
+require 'safeguard/command/init'
