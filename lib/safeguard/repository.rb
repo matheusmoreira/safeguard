@@ -21,11 +21,11 @@ module Safeguard
     end
 
     def hash_table_file_name
-      File.join(directory, HASH_TABLE_FILE_NAME)
+      File.join directory, HASH_TABLE_FILE_NAME
     end
 
     def self.directory_in(dir)
-      File.join(dir, DIRECTORY_NAME)
+      File.join File.expand_path(dir), DIRECTORY_NAME
     end
 
     def self.initialized?(dir)
