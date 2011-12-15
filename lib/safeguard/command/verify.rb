@@ -12,13 +12,20 @@ module Safeguard
       # Repository in the current directory.
       def self.execute(*args)
         repo = Repository.new Dir.pwd
-        args.each do |filename|
-          puts "#{filename} " + if repo.verify filename
-            'OK'
-          else
-            'Mismatch'
+        if args.empty?
+          repo.verify_all do |filename, result|
+            display_result filename, result
+          end
+        else
+          args.each do |filename|
+            result = repo.verify filename
+            display_result filename, result
           end
         end
+      end
+
+      def self.display_result(filename, result)
+        puts "#{filename} => #{result ? 'OK' : 'Mismatch'}"
       end
 
     end
