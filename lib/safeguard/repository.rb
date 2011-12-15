@@ -1,4 +1,5 @@
 require 'safeguard/hash_table'
+require 'fileutils'
 
 module Safeguard
 
