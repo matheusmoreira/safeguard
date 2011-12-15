@@ -27,6 +27,14 @@ module Safeguard
       digest_file filename, OpenSSL::Digest::MD5
     end
 
+    # Digests a file using a hash function, which can be the symbol of any
+    # Digest module method that takes a filename. Uses SHA1 by default.
+    #
+    #   Safeguard::Digest.file(filename, :md5)
+    #
+    # Is equivalent to:
+    #
+    #   Safeguard::Digest.md5(filename)
     def self.file(filename, hash_function = :sha1)
       send hash_function, filename
     end
