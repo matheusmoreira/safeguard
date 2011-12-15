@@ -53,8 +53,10 @@ module Safeguard
     # Verifies all files present in this repository, and returns a hash of
     # results associating a filename with either +true+, when the file is the
     # same as the original version, or +false+, when otherwise.
-    def verify_all
-      hash_table.verify_all
+    #
+    # If a block is given, the filename and the result will be yielded instead.
+    def verify_all(&block)
+      hash_table.verify_all &block
     end
 
     # Returns the path to the repository relative to the given +dir+.
