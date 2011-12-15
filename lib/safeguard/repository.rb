@@ -33,6 +33,16 @@ module Safeguard
       File.join directory, HASH_TABLE_FILE_NAME
     end
 
+    # Adds a file to this repository's HashTable, and saves it.
+    def track(filename)
+      table = hash_table_file_name
+      file = File.expand_path filename
+      hash_table.instance_eval do
+        add file
+        save table
+      end
+    end
+
     # Returns the path to the repository relative to the given +dir+.
     def self.directory_in(dir)
       File.join File.expand_path(dir), DIRECTORY_NAME
