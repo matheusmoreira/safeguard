@@ -1,4 +1,5 @@
 require 'openssl'
+require 'zlib'
 
 module Safeguard
 
@@ -25,6 +26,15 @@ module Safeguard
     # Compute the MD5 sum of a file.
     def self.md5(filename)
       digest_file filename, OpenSSL::Digest::MD5
+    end
+
+    # Compute the CRC32 sum of a file.
+    def self.crc32(filename)
+      # Read file in binary mode. Doesn't make any difference in *nix, but Ruby
+      # will attempt to convert line endings if the file is opened in text mode
+      # in other platforms.
+      data = File.binread filename
+      Zlib.crc32(data).to_s 16
     end
 
     # Digests a file using a hash function, which can be the symbol of any
