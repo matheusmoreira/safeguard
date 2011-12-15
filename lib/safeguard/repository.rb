@@ -43,6 +43,13 @@ module Safeguard
       end
     end
 
+    # Verifies whether or not the file still matches the original version.
+    #
+    # An exception will be raised if the given file isn't in the repository.
+    def verify(filename)
+      hash_table.verify File.expand_path(filename)
+    end
+
     # Returns the path to the repository relative to the given +dir+.
     def self.directory_in(dir)
       File.join File.expand_path(dir), DIRECTORY_NAME
