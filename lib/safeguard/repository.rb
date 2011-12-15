@@ -50,6 +50,13 @@ module Safeguard
       hash_table.verify File.expand_path(filename)
     end
 
+    # Verifies all files present in this repository, and returns a hash of
+    # results associating a filename with either +true+, when the file is the
+    # same as the original version, or +false+, when otherwise.
+    def verify_all
+      hash_table.verify_all
+    end
+
     # Returns the path to the repository relative to the given +dir+.
     def self.directory_in(dir)
       File.join File.expand_path(dir), DIRECTORY_NAME
