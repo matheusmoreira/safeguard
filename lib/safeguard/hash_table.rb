@@ -47,6 +47,18 @@ module Safeguard
       Digest.file(filename) == hash
     end
 
+    # Verifies all files stored in this table and returns a hash of results
+    # associating a filename with either +true+, when the file's recalculated
+    # hash is equal to the hash stored in this table, or +false+, when
+    # otherwise.
+    def verify_all
+      {}.tap do |results|
+        @table.keys.each do |file|
+          results[file] = verify file
+        end
+      end
+    end
+
   end
 
 end
