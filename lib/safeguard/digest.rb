@@ -22,5 +22,9 @@ module Safeguard
       digest_file filename, OpenSSL::Digest::SHA1
     end
 
+    def self.file(filename, hash_function = :sha1)
+      send hash_function, filename
+    end
+
   end
 end
