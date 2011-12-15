@@ -6,7 +6,7 @@ module Safeguard
   module Digest
 
     # Compute the SHA1 sum of a file.
-    def self.file(filename)
+    def self.sha1(filename)
       OpenSSL::Digest::SHA1.file(filename).hexdigest
     end
 
