@@ -16,7 +16,7 @@ module Safeguard
     # Patch version.
     #
     # Increments denote changes in implementation.
-    PATCH = 1
+    PATCH = 2
 
     # Build version.
     #
