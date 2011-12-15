@@ -22,6 +22,11 @@ module Safeguard
       digest_file filename, OpenSSL::Digest::SHA1
     end
 
+    # Compute the MD5 sum of a file.
+    def self.md5(filename)
+      digest_file filename, OpenSSL::Digest::MD5
+    end
+
     def self.file(filename, hash_function = :sha1)
       send hash_function, filename
     end
