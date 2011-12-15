@@ -13,8 +13,12 @@ module Safeguard
       def self.execute(*args)
         repo = Repository.new Dir.pwd
         args.each do |filename|
-          puts "Adding #{filename}..."
-          repo.track filename
+          begin
+            puts "Adding #{filename}..."
+            repo.track filename
+          rescue => e
+            puts e.message
+          end
         end
       end
 
