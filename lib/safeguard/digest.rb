@@ -6,6 +6,8 @@ module Safeguard
   # Encapsulates checksum computation for files using a set of hash functions.
   module Digest
 
+    SUPPORTED_ALGORITHMS = %w(sha1 md5 crc32).map!(&:to_sym).freeze
+
     # Digests a file using an +algorithm+.
     #
     # Algorithms are expected include the Digest::Instance module.
