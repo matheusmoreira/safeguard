@@ -12,8 +12,7 @@ module Safeguard
       # current directory, if +args+ is empty, or the directory designated by
       # the last element in +args+.
       action do |options, args|
-        args << Dir.pwd if args.empty?
-        dir = File.expand_path args.pop
+        dir = File.expand_path(args.pop || options.dir)
         repo = Repository.new(dir)
         puts "Initialized safeguard repository in #{repo.dir}"
       end
