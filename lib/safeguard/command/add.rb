@@ -1,17 +1,15 @@
 require 'safeguard/command'
 
 module Safeguard
-  module Command
+  class Command
 
     # Adds files to a Repository.
-    module Add
-
-      Command.register self
+    class Add < Command
 
       # For every argument, try to add it to the Repository in the current
       # directory.
-      def self.execute(*args)
-        repo = Repository.new Dir.pwd
+      action do |options, args|
+        repo = Repository.new options.dir
         count = 0
         args.each do |filename|
           begin

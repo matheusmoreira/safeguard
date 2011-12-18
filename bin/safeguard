@@ -1,7 +1,4 @@
 #!/usr/bin/env ruby
 require 'safeguard'
 
-puts 'No command given' or exit if ARGV.empty?
-
-command = ARGV.shift
-Safeguard.run(command, *ARGV)
+Safeguard::Command.run *ARGV

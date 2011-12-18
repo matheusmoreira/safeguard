@@ -17,4 +17,6 @@ Gem::Specification.new('safeguard') do |gem|
   gem.files       = `git ls-files`.split "\n"
   gem.executables = `git ls-files -- bin/*`.split("\n").map &File.method(:basename)
 
+  gem.add_runtime_dependency 'acclaim'
+
 end

@@ -1,17 +1,15 @@
 require 'safeguard/command'
 
 module Safeguard
-  module Command
+  class Command
 
     # Verifies the files present in a Repository.
-    module Verify
-
-      Command.register self
+    class Verify < Command
 
       # Verify the files passed as arguments using information from the
       # Repository in the current directory.
-      def self.execute(*args)
-        repo = Repository.new Dir.pwd
+      action do |options, args|
+        repo = Repository.new options.dir
         if args.empty?
           repo.verify_all do |filename, result|
             display_result filename, result

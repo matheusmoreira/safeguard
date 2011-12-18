@@ -1,42 +1,21 @@
+require 'acclaim/command'
+
 module Safeguard
 
-  # Manages the commands that may be given to Safeguard.
-  module Command
+  # Main Safeguard command. Currently just invokes the init command.
+  #
+  #   $ safeguard .
+  class Command < Acclaim::Command
 
-    instance_eval do
+    option :dir, names: %w(-D --dir --directory), default: Dir.pwd, arity: [1,0],
+                 description: 'Directory in which the repository is'
 
-      # Returns a hash that associates command modules by name.
-      def commands
-        @commands ||= {}
-      end
-
-      alias :all :commands
-
-      # Computes a name for the command and associates it with the command's
-      # module.
-      def register(command_module)
-        name = command_module.name.gsub(/^.*::/, '').downcase
-        commands[name] = command_module
-      end
-
-      # Looks up a command by name and returns its module, raising an exception
-      # if there is no match.
-      def find(command_name)
-        name = command_name.to_s.strip.downcase
-        commands[name].tap do |command|
-          raise "unsupported command: #{name}" if command.nil?
-        end
-      end
-
-      # Attempts to find a command by name, and, if successful, invokes it with
-      # the given arguments.
-      def invoke(command_name, *args)
-        find(command_name).execute(*args)
-      end
-
+    action do |options, args|
+      Init.execute options, args
     end
 
   end
+
 end
 
 require 'safeguard/command/add'
