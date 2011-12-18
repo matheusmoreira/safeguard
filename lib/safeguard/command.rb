@@ -7,8 +7,8 @@ module Safeguard
   #   $ safeguard .
   class Command < Acclaim::Command
 
-    opt :dir, names: %w(-D --dir --directory), default: Dir.pwd, arity: [1,0],
-              description: 'Directory in which the repository is'
+    opt :dir, '-D', '--dir', '--directory', 'Directory in which the repository is',
+              default: Dir.pwd, arity: [1,0]
 
     action do |options, args|
       Init.execute options, args
