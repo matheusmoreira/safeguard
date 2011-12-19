@@ -1,3 +1,4 @@
+require 'safeguard/core_ext/file'
 require 'openssl'
 require 'zlib'
 
@@ -14,43 +15,42 @@ module Safeguard
     #
     #   OpenSSL::Digest::SHA1.include? Digest::Instance
     #   => true
-    def self.digest_file(filename, algorithm)
-      algorithm.file(filename).hexdigest
+    def self.digest_with(algorithm, file)
+      algorithm.file(file).hexdigest
     end
 
-    private_class_method :digest_file
+    private_class_method :digest_with
 
-    # Compute the SHA1 sum of a file.
-    def self.sha1(filename)
-      digest_file filename, OpenSSL::Digest::SHA1
+    # Computes the SHA1 sum of the given file.
+    def self.sha1(*args)
+      digest_with OpenSSL::Digest::SHA1, *args
     end
 
-    # Compute the MD5 sum of a file.
-    def self.md5(filename)
-      digest_file filename, OpenSSL::Digest::MD5
+    # Computes the MD5 sum of the given file.
+    def self.md5(*args)
+      digest_with OpenSSL::Digest::MD5, *args
     end
 
-    # Compute the CRC32 sum of a file.
-    def self.crc32(filename)
+    # Computes the CRC32 sum of the given file.
+    def self.crc32(*args)
       # Read file in binary mode. Doesn't make any difference in *nix, but Ruby
       # will attempt to convert line endings if the file is opened in text mode
       # in other platforms.
-      data = File.binread filename
-      Zlib.crc32(data).to_s 16
+      Zlib.crc32(file.read).to_s 16
     end
 
     # Digests a file using a hash function, which can be the symbol of any
-    # Digest module method that takes a filename. Uses SHA1 by default.
+    # Digest module method that takes a file. Uses SHA1 by default.
     #
-    #   Safeguard::Digest.file(filename, :md5)
+    #   Safeguard::Digest.file(file, :md5)
     #
     # Is equivalent to:
     #
-    #   Safeguard::Digest.md5(filename)
-    def self.file(filename, hash_function = :sha1)
+    #   Safeguard::Digest.md5(file)
+    def self.file(file, hash_function = :sha1)
       f = hash_function.to_sym
       raise ArgumentError, "Unsupported hash function: #{f}" unless respond_to? f
-      send hash_function, filename
+      send hash_function, file
     end
 
   end
