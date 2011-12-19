@@ -16,8 +16,12 @@ module Safeguard
           end
         else
           args.each do |filename|
-            result = repo.verify filename
-            display_result filename, result
+            begin
+              result = repo.verify filename
+              display_result filename, result
+             rescue => e
+              puts e.message
+             end
           end
         end
       end
