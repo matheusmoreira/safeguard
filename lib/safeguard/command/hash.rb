@@ -15,7 +15,7 @@ module Safeguard
     class Hash < Command
 
       opt :func, '--function', '--hash-function', '--algorithm',
-                 "Algorithm to use. Currently supported: #{Digest::SUPPORTED_ALGORITHMS.join(', ')}"
+                 "Algorithm to use. Currently supported: #{Digest::SUPPORTED_ALGORITHMS.join(', ')}",
                  default: :sha1, arity: [1,0]
 
       # For every argument, outputs its checksum if it exists as a file.
