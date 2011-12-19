@@ -1,4 +1,5 @@
 require 'acclaim/command'
+require 'acclaim/version'
 
 module Safeguard
 
@@ -7,7 +8,10 @@ module Safeguard
   #   $ safeguard .
   class Command < Acclaim::Command
 
-    opt :dir, '-D', '--dir', '--directory', 'Directory in which the repository is',
+    help
+    version Acclaim::Version::STRING
+
+    opt :dir, '-D', '--dir', '--directory', 'Directory in which the repository is.',
               default: Dir.pwd, arity: [1,0]
 
     action do |options, args|
