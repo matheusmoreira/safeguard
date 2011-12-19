@@ -16,11 +16,13 @@ module Safeguard
     alias :dir :directory
 
     # Initializes a Safeguard repository in or from the given directory.
-    #
-    # If the given directory does not contain a repository directory, whose name
-    # is defined by the DIRECTORY_NAME constant, it will be created.
     def initialize(dir)
       self.directory = Repository.directory_in(dir)
+    end
+
+    # Creates a directory for this repository, if one doesn't exist. The
+    # directory will have the name defined in the DIRECTORY_NAME constant.
+    def create_directory!
       FileUtils.mkdir_p directory
     end
 
