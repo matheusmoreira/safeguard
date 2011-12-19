@@ -16,7 +16,7 @@ module Safeguard
         yield read bytes until eof?
       end
 
-      ::File.include self
+      class ::File; include Safeguard::CoreExt::File; end
 
     end
   end
