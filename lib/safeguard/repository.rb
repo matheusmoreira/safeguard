@@ -1,4 +1,4 @@
-require 'safeguard/hash_table'
+require 'safeguard/repository/hash_table'
 require 'fileutils'
 
 module Safeguard
