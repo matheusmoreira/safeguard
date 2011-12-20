@@ -54,16 +54,12 @@ module Safeguard
     # hash is equal to the hash stored in this table, or +false+, when
     # otherwise.
     #
-    # If a block is given, the filename and the result will be yielded instead.
+    # The filename and the result will be yielded if given a block.
     def verify_all
-      files = @table.keys
-      if block_given?
-        files.each { |file| yield file, verify(file) }
-      else
-        {}.tap do |results|
-          files.each do |file|
-            results[file] = verify file
-          end
+      {}.tap do |results|
+        @table.keys.each do |file|
+          results[file] = result = verify file
+          yield file, result if block_given?
         end
       end
     end

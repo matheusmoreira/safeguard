@@ -57,7 +57,7 @@ module Safeguard
     # results associating a filename with either +true+, when the file is the
     # same as the original version, or +false+, when otherwise.
     #
-    # If a block is given, the filename and the result will be yielded instead.
+    # If a block is given, the filename and the result will be yielded.
     def verify_all(&block)
       hash_table.verify_all &block
     end
