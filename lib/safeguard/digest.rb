@@ -1,6 +1,6 @@
 require 'safeguard/core_ext/file'
+require 'safeguard/digest/crc32'
 require 'openssl'
-require 'zlib'
 
 module Safeguard
 
@@ -36,7 +36,7 @@ module Safeguard
       # Read file in binary mode. Doesn't make any difference in *nix, but Ruby
       # will attempt to convert line endings if the file is opened in text mode
       # in other platforms.
-      Zlib.crc32(file.read).to_s 16
+      digest_with Safeguard::Digest::CRC32, *args
     end
 
     # Digests a file using a hash function, which can be the symbol of any
