@@ -27,9 +27,7 @@ module Safeguard
       # Associates the given +filename+ to the computed checksum of the file it
       # refers to.
       def <<(filename)
-        File.open(filename, 'rb') do |f|
-          @table[filename] = Digest.file f
-        end
+        @table[filename] = Digest.file filename
       end
 
       alias :add :<<
@@ -47,7 +45,7 @@ module Safeguard
       def verify(filename)
         hash = @table[filename]
         raise "File not in repository: #{filename}" unless hash
-        File.open(filename, 'rb') { |f| Digest.file f } == hash
+        Digest.file(filename) == hash
       end
 
       # Verifies all files stored in this table and returns a hash of results

@@ -22,9 +22,7 @@ module Safeguard
       action do |options, args|
         args.each do |filename|
           next unless File.readable? filename
-          digest = File.open(filename, 'rb') do |f|
-            Digest.file f, options.func
-          end
+          digest = Digest.file filename, options.func
           puts "#{digest} => #{filename}"
         end
       end

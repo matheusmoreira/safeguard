@@ -15,8 +15,14 @@ module Safeguard
     #
     #   OpenSSL::Digest::SHA1.include? Digest::Instance
     #   => true
-    def self.digest_with(algorithm, file)
-      algorithm.file(file).hexdigest
+    def self.digest_with(algorithm, filename)
+      digest = algorithm.new
+      File.open(filename, 'rb') do |file|
+        file.each_chunk do |chunk|
+          digest << chunk
+        end
+      end
+      digest.hexdigest!
     end
 
     private_class_method :digest_with
