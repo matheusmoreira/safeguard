@@ -39,7 +39,7 @@ module Safeguard
     # Adds a file to this repository's HashTable, and saves it.
     def track(filename)
       table = hash_table_file_name
-      file = File.expand_path filename
+      file = filename
       hash_table.instance_eval do
         add file
         save table
@@ -50,7 +50,7 @@ module Safeguard
     #
     # An exception will be raised if the given file isn't in the repository.
     def verify(filename)
-      hash_table.verify File.expand_path(filename)
+      hash_table.verify filename
     end
 
     # Verifies all files present in this repository, and returns a hash of
