@@ -67,6 +67,12 @@ module Safeguard
       File.join File.expand_path(dir), DIRECTORY_NAME
     end
 
+    # Checks whether or not this repository's directory has been created and
+    # initialized.
+    def initialized?
+      File.directory? dir
+    end
+
     # Checks whether or not a repository has been created in the given +dir+.
     def self.initialized?(dir)
       File.directory? directory_in(dir)
