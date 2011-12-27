@@ -10,14 +10,14 @@ module Safeguard
 
       # Saves the HashTable to a YAML file.
       def save(filename)
-        File.open("#{filename}.yaml", 'w') do |file|
+        File.open(filename, 'w') do |file|
           file.puts to_yaml
         end
       end
 
       # Loads the HashTable from a YAML file.
       def self.load(filename)
-        YAML::load_file "#{filename}.yaml"
+        YAML::load_file filename
       end
 
       # Associates the given +filename+ to the computed checksum of the file it
