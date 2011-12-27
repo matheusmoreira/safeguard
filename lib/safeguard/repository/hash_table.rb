@@ -1,4 +1,5 @@
 require 'safeguard/digest'
+require 'ribbon'
 require 'yaml'
 
 module Safeguard
@@ -9,7 +10,7 @@ module Safeguard
 
       # Initializes an empty HashTable.
       def initialize
-        @table = {}
+        @table = Ribbon::Object.new
       end
 
       # Saves the HashTable to a YAML file.
