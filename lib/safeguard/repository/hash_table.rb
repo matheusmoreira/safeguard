@@ -1,4 +1,5 @@
 require 'safeguard/digest'
+require 'ribbon'
 require 'yaml'
 
 module Safeguard
@@ -7,34 +8,29 @@ module Safeguard
     # Holds filename => checksum pairs.
     class HashTable
 
-      # Initializes an empty HashTable.
-      def initialize
-        @table = {}
-      end
-
       # Saves the HashTable to a YAML file.
       def save(filename)
-        File.open("#{filename}.yaml", 'w') do |file|
+        File.open(filename, 'w') do |file|
           file.puts to_yaml
         end
       end
 
       # Loads the HashTable from a YAML file.
       def self.load(filename)
-        YAML::load_file "#{filename}.yaml"
+        YAML::load_file filename
       end
 
       # Associates the given +filename+ to the computed checksum of the file it
       # refers to.
       def <<(filename)
-        @table[filename] = Digest.file filename
+        table[filename] = Digest.file filename
       end
 
       alias :add :<<
 
       # Looks up the checksum for the given +filename+.
       def [](filename)
-        @table[filename]
+        table[filename]
       end
 
       # Recalculates the hash and compares it to the original hash associated with
@@ -43,7 +39,7 @@ module Safeguard
       # If a hash for the given file isn't stored in this table, an exception will
       # be raised.
       def verify(filename)
-        hash = @table[filename]
+        hash = table[filename]
         raise "File not in repository: #{filename}" unless hash
         Digest.file(filename) == hash
       end
@@ -56,11 +52,17 @@ module Safeguard
       # The filename and the result will be yielded if given a block.
       def verify_all
         {}.tap do |results|
-          @table.keys.each do |file|
+          Ribbon::Object.keys(table).each do |file|
             results[file] = result = verify file
             yield file, result if block_given?
           end
         end
+      end
+
+      protected
+
+      def table
+        @table ||= Ribbon::Object.new
       end
 
     end
