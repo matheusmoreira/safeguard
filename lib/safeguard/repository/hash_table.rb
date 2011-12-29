@@ -39,11 +39,11 @@ module Safeguard
         table[filename]
       end
 
-      # Recalculates the hash and compares it to the original hash associated with
-      # the given filename.
+      # Recalculates the hash and compares it to the original hash associated
+      # with the given filename.
       #
-      # If a hash for the given file isn't stored in this table, an exception will
-      # be raised.
+      # If a hash for the given file isn't stored in this table, an exception
+      # will be raised.
       def verify(filename)
         hash = table[filename]
         raise "File not in repository: #{filename}" unless hash
