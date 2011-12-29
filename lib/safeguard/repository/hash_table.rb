@@ -9,6 +9,11 @@ module Safeguard
     # Holds filename => checksum pairs.
     class HashTable
 
+      # Initializes this hash table with the contents of the given Ribbon.
+      def initialize(ribbon = nil)
+        Ribbon.merge! table, ribbon if ribbon
+      end
+
       # Saves the HashTable to a YAML file.
       def save(filename)
         File.open(filename, 'w') do |file|
