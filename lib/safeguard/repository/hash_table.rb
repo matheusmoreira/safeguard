@@ -55,7 +55,7 @@ module Safeguard
       # The filename and the result will be yielded if given a block.
       def verify_all
         {}.tap do |results|
-          Ribbon::Object.keys(table).each do |file|
+          Ribbon.keys(table).each do |file|
             results[file] = result = verify file
             yield file, result if block_given?
           end
@@ -65,7 +65,7 @@ module Safeguard
       protected
 
       def table
-        @table ||= Ribbon::Object.new
+        @table ||= Ribbon.new
       end
 
       def table=(table)
