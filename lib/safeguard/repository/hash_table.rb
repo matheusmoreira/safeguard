@@ -23,9 +23,7 @@ module Safeguard
 
       # Loads the HashTable from a YAML file.
       def self.load(filename)
-        new.tap do |hash_table|
-          hash_table.send :table=, YAML::load_file(filename).to_ribbon
-        end
+        new YAML::load_file(filename).to_ribbon
       end
 
       # Associates the given +filename+ to the computed checksum of the file it
