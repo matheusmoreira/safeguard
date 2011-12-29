@@ -28,7 +28,7 @@ module Safeguard
 
     # Loads this repository's HashTable. Creates a new one if unable to do so.
     def hash_table
-      HashTable.load hash_table_file_name rescue HashTable.new
+      @table ||= (HashTable.load hash_table_file_name rescue HashTable.new)
     end
 
     # Returns the name of the HashTable file relative to this repository.
