@@ -1,5 +1,6 @@
 require 'safeguard/digest'
 require 'ribbon'
+require 'ribbon/core_ext'
 require 'yaml'
 
 module Safeguard
@@ -11,13 +12,15 @@ module Safeguard
       # Saves the HashTable to a YAML file.
       def save(filename)
         File.open(filename, 'w') do |file|
-          file.puts to_yaml
+          file.puts Ribbon.to_yaml table
         end
       end
 
       # Loads the HashTable from a YAML file.
       def self.load(filename)
-        YAML::load_file filename
+        new.tap do |hash_table|
+          hash_table.send :table=, YAML::load_file(filename).to_ribbon
+        end
       end
 
       # Associates the given +filename+ to the computed checksum of the file it
@@ -63,6 +66,10 @@ module Safeguard
 
       def table
         @table ||= Ribbon::Object.new
+      end
+
+      def table=(table)
+        @table = table
       end
 
     end
