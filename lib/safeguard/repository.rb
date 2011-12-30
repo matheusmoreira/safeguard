@@ -26,9 +26,9 @@ module Safeguard
       FileUtils.mkdir_p directory
     end
 
-    # Loads this repository's HashTable. Creates a new one if unable to do so.
+    # This repository's HashTable. Lazily loaded from disk.
     def hash_table
-      @table ||= (HashTable.load hash_table_file_name rescue HashTable.new)
+      @table ||= load_hash_table!
     end
 
     # Returns the name of the HashTable file relative to this repository.
@@ -85,6 +85,17 @@ module Safeguard
     # Checks whether or not a repository has been created in the given +dir+.
     def self.initialized?(dir)
       File.directory? directory_in(dir)
+    end
+
+    private
+
+    # Loads the hash table from file. Creates a new one if unable to do so.
+    def load_hash_table!
+      HashTable.load hash_table_file_name
+    rescue
+      # TODO: handle all error cases properly. This can overwrite a perfectly
+      #       good hash table for incredibly sily reasons.
+      HashTable.new
     end
 
   end
