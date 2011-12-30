@@ -17,14 +17,16 @@ module Safeguard
       action do |options, args|
         repo = Repository.new options.dir
         count = 0
-        args.each do |filename|
-          begin
-            puts "Adding #{filename}..."
-            repo.track filename
-            # If an exception is raised, count will not be incremented.
-            count += 1
-          rescue => e
-            puts e.message
+        repo.before_save do
+          args.each do |filename|
+            begin
+              puts "Adding #{filename}..."
+              add_checksum_of filename, options.func
+              # If an exception is raised, count will not be incremented.
+              count += 1
+            rescue => e
+              puts e.message
+            end
           end
         end
         puts "Added #{count} files to repository."
