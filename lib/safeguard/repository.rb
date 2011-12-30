@@ -49,14 +49,10 @@ module Safeguard
       save_hash_table
     end
 
-    # Adds a file to this repository's HashTable, and saves it.
-    def track(filename)
-      table = hash_table_file_name
-      file = filename
-      hash_table.instance_eval do
-        add file
-        save table
-      end
+    # Calculates the checksum of the file and adds associates them in this
+    # repository's HashTable.
+    def add_checksum_of(file, hash_function)
+      hash_table.add file, hash_function
     end
 
     # Verifies whether or not the file still matches the original version.
