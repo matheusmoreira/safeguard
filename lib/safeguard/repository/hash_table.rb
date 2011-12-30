@@ -32,7 +32,7 @@ module Safeguard
         table[filename] = Digest.file filename
       end
 
-      # Looks up the checksum for the given +filename+.
+      # Looks up the checksum data for the given +filename+.
       def [](filename)
         table[filename]
       end
