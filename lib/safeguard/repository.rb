@@ -36,6 +36,12 @@ module Safeguard
       File.join directory, HASH_TABLE_FILE_NAME
     end
 
+    # Saves this Repository's HashTable with the filename returned by
+    # #hash_table_file_name.
+    def save_hash_table
+      hash_table.save hash_table_file_name
+    end
+
     # Adds a file to this repository's HashTable, and saves it.
     def track(filename)
       table = hash_table_file_name
