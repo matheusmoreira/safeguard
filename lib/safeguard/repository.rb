@@ -42,6 +42,13 @@ module Safeguard
       hash_table.save hash_table_file_name
     end
 
+    # Calls the block and ensures that all data is persisted afterwards.
+    def before_save(&block)
+      if block.arity == 1 then block.call self else instance_eval &block end
+    ensure
+      save_hash_table
+    end
+
     # Adds a file to this repository's HashTable, and saves it.
     def track(filename)
       table = hash_table_file_name
