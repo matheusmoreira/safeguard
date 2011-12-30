@@ -1,10 +1,16 @@
 require 'safeguard/command'
+require 'safeguard/digest'
 
 module Safeguard
   class Command
 
     # Adds files to a Repository.
     class Add < Command
+
+      opt :func, '--hash-function', '--function', '--algorithm',
+                 "Algorithm to use to calculate the file's checksum. " <<
+                 "Currently supported: #{Digest::SUPPORTED_ALGORITHMS.join(', ')}",
+                 default: :sha1, arity: [1,0]
 
       # For every argument, try to add it to the Repository in the current
       # directory.
