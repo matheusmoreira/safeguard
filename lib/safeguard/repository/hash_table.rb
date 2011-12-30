@@ -28,11 +28,9 @@ module Safeguard
 
       # Associates the given +filename+ to the computed checksum of the file it
       # refers to.
-      def <<(filename)
+      def add(filename)
         table[filename] = Digest.file filename
       end
-
-      alias :add :<<
 
       # Looks up the checksum for the given +filename+.
       def [](filename)
