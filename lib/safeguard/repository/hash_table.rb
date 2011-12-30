@@ -28,8 +28,9 @@ module Safeguard
 
       # Associates the given +filename+ to the computed checksum of the file it
       # refers to.
-      def add(filename)
-        table[filename] = Digest.file filename
+      def add(filename, hash_function)
+        digest = Digest.file filename, hash_function
+        table[filename][hash_function] = digest
       end
 
       # Looks up the checksum data for the given +filename+.
