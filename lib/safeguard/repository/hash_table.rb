@@ -11,13 +11,13 @@ module Safeguard
 
       # Initializes this hash table with the contents of the given Ribbon.
       def initialize(ribbon = nil)
-        Ribbon.merge! table, ribbon if ribbon
+        Ribbon[table].merge! ribbon if ribbon
       end
 
       # Saves the HashTable to a YAML file.
       def save(filename)
         File.open(filename, 'w') do |file|
-          file.puts Ribbon.to_yaml table
+          file.puts Ribbon[table].to_yaml
         end
       end
 
@@ -58,7 +58,7 @@ module Safeguard
       # The filename and the result will be yielded if given a block.
       def verify_all
         {}.tap do |results|
-          Ribbon.keys(table).each do |file|
+          Ribbon[table].keys.each do |file|
             results[file] = result = verify file
             yield file, result if block_given?
           end
@@ -69,10 +69,6 @@ module Safeguard
 
       def table
         @table ||= Ribbon.new
-      end
-
-      def table=(table)
-        @table = table
       end
 
     end
