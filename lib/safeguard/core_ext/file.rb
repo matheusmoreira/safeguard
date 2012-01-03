@@ -15,9 +15,9 @@ module Safeguard
         bytes = case chunk_size when nil, 0 then nil else chunk_size.abs end
         yield read bytes until eof?
       end
-
-      ::File.send :include, Safeguard::CoreExt::File
-
     end
+
+    ::File.send :include, Safeguard::CoreExt::File
+
   end
 end
