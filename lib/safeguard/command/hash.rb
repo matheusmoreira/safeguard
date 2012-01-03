@@ -21,10 +21,12 @@ module Safeguard
 
       # For every argument, outputs its checksum if it exists as a file.
       action do |options, args|
-        args.each do |filename|
-          next unless File.readable? filename
-          digest = Digest.file filename, options.func
-          puts "#{digest} => #{filename}"
+        hasher = Hasher.new *args, :functions => options.func
+        hasher.each do |file, hash_data|
+          puts "#{file}:"
+          hasher.functions.each do |function|
+            puts "\t#{function} => #{hash_data[function]}"
+          end
         end
       end
 
