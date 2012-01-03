@@ -18,20 +18,9 @@ module Safeguard
       # directory.
       action do |options, args|
         repo = Repository.new options.dir
-        count = 0
         repo.before_save do
-          args.each do |filename|
-            begin
-              puts "Adding #{filename}..."
-              add_checksum_of filename, options.func
-              # If an exception is raised, count will not be incremented.
-              count += 1
-            rescue => e
-              puts e.message
-            end
-          end
+          repo.add_files! *args, :functions => options.func, :force => options.force?
         end
-        puts "Added #{count} files to repository."
       end
 
     end
