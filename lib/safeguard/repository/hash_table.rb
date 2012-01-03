@@ -10,8 +10,8 @@ module Safeguard
     class HashTable
 
       # Initializes this hash table with the contents of the given Ribbon.
-      def initialize(ribbon = nil)
-        table.merge! ribbon if ribbon
+      def initialize(ribbon = nil, &block)
+        Ribbon.merge! table, ribbon, &block if ribbon
       end
 
       # Saves the HashTable to a YAML file.
