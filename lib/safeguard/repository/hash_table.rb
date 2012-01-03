@@ -11,13 +11,13 @@ module Safeguard
 
       # Initializes this hash table with the contents of the given Ribbon.
       def initialize(ribbon = nil)
-        Ribbon.merge! table, ribbon if ribbon
+        table.merge! ribbon if ribbon
       end
 
       # Saves the HashTable to a YAML file.
       def save(filename)
         File.open(filename, 'w') do |file|
-          file.puts Ribbon[table].to_yaml
+          file.puts table.to_yaml
         end
       end
 
@@ -67,7 +67,7 @@ module Safeguard
       protected
 
       def table
-        @table ||= Ribbon.new
+        @table ||= Ribbon::Wrapper.new
       end
 
     end
