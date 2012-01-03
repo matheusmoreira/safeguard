@@ -14,7 +14,7 @@ module Safeguard
     #   $ safeguard --hash-function md5 hash *.mp3
     class Hash < Command
 
-      opt :func, '--function', '--hash-function', '--algorithm',
+      opt :func, '--hash-function', '--hash-functions'
                  "Algorithm to use to calculate the file's checksum. " <<
                  "Currently supported: #{Digest::SUPPORTED_ALGORITHMS.join(', ')}",
                  default: :sha1, arity: [1,-1]
