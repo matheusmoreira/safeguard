@@ -31,6 +31,11 @@ module Safeguard
         table[filename]
       end
 
+      # Returns a list of files present in this hash table.
+      def files
+        table.keys
+      end
+
       protected
 
       def table
