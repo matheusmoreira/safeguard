@@ -7,10 +7,10 @@ module Safeguard
     # Adds files to a Repository.
     class Add < Command
 
-      opt :func, '--hash-function', '--function', '--algorithm',
+      opt :func, '--hash-function', '--hash-functions', Symbol,
                  "Algorithm to use to calculate the file's checksum. " <<
                  "Currently supported: #{Digest::SUPPORTED_ALGORITHMS.join(', ')}",
-                 default: :sha1, arity: [1,0]
+                 default: :sha1, arity: [1,-1]
 
       # For every argument, try to add it to the Repository in the current
       # directory.
