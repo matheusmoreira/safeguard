@@ -1,5 +1,8 @@
+require 'safeguard/hasher'
 require 'safeguard/repository/hash_table'
 require 'fileutils'
+require 'ribbon'
+require 'ribbon/core_ext'
 
 module Safeguard
 
@@ -49,10 +52,18 @@ module Safeguard
       save_hash_table
     end
 
-    # Calculates the checksum of the file and adds associates them in this
-    # repository's HashTable.
-    def add_checksum_of(file, hash_function)
-      hash_table.add file, hash_function
+    # Calculates the checksum of the given files and stores the results. The
+    # given +args+ should be able to initialize a new hasher.
+    def add_files!(*args)
+      ribbon = args.extract_ribbon!
+      hasher = Hasher.new *args, ribbon
+      hasher.files.delete_if do |file|
+        hash_table.files.include? file
+      end unless ribbon.force?
+      results = hasher.results
+      hash_table.merge! results
+    end
+
     end
 
     # Verifies whether or not the file still matches the original version.
