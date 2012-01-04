@@ -64,6 +64,9 @@ module Safeguard
       hash_table.merge! results
     end
 
+    # Creates a Hasher for the files present in this repository.
+    def create_hasher(functions)
+      Hasher.new *hash_table.files, :functions => functions
     end
 
     # Verifies whether or not the file still matches the original version.
