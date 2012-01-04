@@ -11,7 +11,7 @@ module Safeguard
 
       # Initializes this hash table with the contents of the given Ribbon.
       def initialize(ribbon = nil, &block)
-        Ribbon.merge! table, ribbon, &block if ribbon
+        merge! ribbon, &block if ribbon
       end
 
       # Saves the HashTable to a YAML file.
@@ -24,6 +24,12 @@ module Safeguard
       # Loads the HashTable from a YAML file.
       def self.load(filename)
         new YAML::load_file(filename).to_ribbon
+      end
+
+      # Merges this hash table's data with the other's.
+      def merge!(other, &block)
+        other = other.table if other.is_a? HashTable
+        Ribbon.merge! table, other, &block
       end
 
       # Looks up the checksum data for the given +filename+.
