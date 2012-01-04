@@ -19,7 +19,8 @@ module Safeguard
       action do |options, args|
         repo = Repository.new options.dir
         repo.before_save do
-          repo.add_files! *args, :functions => options.func, :force => options.force?
+          repo.add_files! *args, :functions => options.func,
+                                 :force => options.force?
         end
       end
 
