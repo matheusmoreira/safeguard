@@ -17,13 +17,13 @@ module Safeguard
       # Saves the HashTable to a YAML file.
       def save(filename)
         File.open(filename, 'w') do |file|
-          file.puts table.to_yaml
+          file.puts ribbon.to_yaml
         end
       end
 
       # Loads the HashTable from a YAML file.
       def self.load(filename)
-        new YAML::load_file(filename).to_ribbon
+        new Ribbon::Wrapper.from_yaml File.read(filename)
       end
 
       # Merges this hash table's data with the other's.
@@ -34,18 +34,18 @@ module Safeguard
 
       # Looks up the checksum data for the given +filename+.
       def [](filename)
-        table[filename]
+        ribbon[filename]
       end
 
       # Returns a list of files present in this hash table.
       def files
-        table.keys
+        ribbon.keys
       end
 
-      protected
-
-      def table
-        @table ||= Ribbon::Wrapper.new
+      # The underlying wrapped ribbon used to store filenames and their
+      # associated hashes.
+      def ribbon
+        @ribbon ||= Ribbon::Wrapper.new
       end
 
     end
