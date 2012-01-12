@@ -49,22 +49,23 @@ module Safeguard
     # given hash for a given file is not present in the hash table, the result
     # of the comparison will be the <tt>:hash_missing</tt> symbol.
     def verify!
-      results = Ribbon.new.tap do |results|
-        hasher.each do |file, hash_data|
-          hasher.functions.each do |function|
-            results[file][function] = if hash_table.has_key? file
-              if hash_table[file].has_key? function
-                hash_data[function] == hash_table[file][function]
-              else
-                :hash_missing
-              end
+      results = Ribbon.new
+      hasher.each do |file, hash_data|
+        hasher.functions.each do |function|
+          results[file][function] = if hash_table.has_key? file
+            if hash_table[file].has_key? function
+              hash_data[function] == hash_table[file][function]
             else
-              :file_missing
+              :hash_missing
             end
+          else
+            :file_missing
           end
         end
       end
-      @results = Ribbon[results]
+      results = Ribbon[results]
+      results.wrap_all!
+      @results = results
     end
 
     # Returns the cached data containing the results of the comparison betweeb

@@ -30,14 +30,15 @@ module Safeguard
 
     # Calculates the hash of each file. Updates the cached hash results.
     def hash_files!
-      results = Ribbon.new.tap do |results|
-        files.each do |file|
-          functions.each do |function|
-            results[file][function] = Safeguard::Digest.file file, function
-          end
+      results = Ribbon.new
+      files.each do |file|
+        functions.each do |function|
+          results[file][function] = Safeguard::Digest.file file, function
         end
       end
-      @results = Ribbon[results]
+      results = Ribbon[results]
+      results.wrap_all!
+      @results = results
     end
 
     # Returns the cached results containing the hashes calculated for each file.
