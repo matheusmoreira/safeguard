@@ -76,6 +76,12 @@ module Safeguard
       Verifier.new *args, ribbon.merge!(hash_table: hash_table)
     end
 
+    # Recalculates the checksum of the given files and compares them to the
+    # stored values. +args+ will be used to instantiate a new Verifier.
+    def verify_files(*args)
+      create_verifier_with(*args).results
+    end
+
     # Verifies all files present in this repository, and returns a hash of
     # results associating a filename with either +true+, when the file is the
     # same as the original version, or +false+, when otherwise.
