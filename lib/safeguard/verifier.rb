@@ -1,4 +1,5 @@
 require 'safeguard/hasher'
+require 'safeguard/repository/hash_table'
 require 'ribbon'
 require 'ribbon/core_ext/array'
 
@@ -31,6 +32,7 @@ module Safeguard
       table = ribbon.hash_table? do
         raise ArgumentError, 'No hash table to verify against'
       end
+      table = table.ribbon if Repository::HashTable === table
       self.hash_table = Ribbon[table]
       hash_table.wrap_all!
       args = hash_table.keys if args.empty?
