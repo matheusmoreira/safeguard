@@ -7,10 +7,10 @@ module Safeguard
     # Adds files to a Repository.
     class Add < Command
 
-      opt :func, '--hash-function', '--hash-functions', Symbol,
-                 "Algorithm to use to calculate the file's checksum. " <<
-                 "Currently supported: #{Digest::SUPPORTED_ALGORITHMS.join(', ')}",
-                 default: :sha1, arity: [1,-1]
+      opt :functions, '--use', Symbol,
+                      "Algorithm used to calculate the file's checksum. " <<
+                      "Currently supported: #{Digest::SUPPORTED_ALGORITHMS.join(', ')}",
+                      arity: [1,0], on_multiple: :append
 
       opt :force, '--force', 'Rehash files that are already in the repository'
 
@@ -19,7 +19,7 @@ module Safeguard
       action do |options, args|
         repo = Repository.new options.dir
         repo.before_save do
-          repo.add_files! *args, :functions => options.func,
+          repo.add_files! *args, :functions => options.functions,
                                  :force => options.force?
         end
       end

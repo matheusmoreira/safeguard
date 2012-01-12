@@ -6,6 +6,11 @@ module Safeguard
     # Verifies the files present in a Repository.
     class Verify < Command
 
+      opt :functions, '--use', Symbol,
+                      "Algorithm used to calculate the file's checksum. " <<
+                      "Currently supported: #{Digest::SUPPORTED_ALGORITHMS.join(', ')}",
+                      arity: [1,0], on_multiple: :append
+
       # Verify the files passed as arguments using information from the
       # Repository in the current directory.
       action do |options, args|
