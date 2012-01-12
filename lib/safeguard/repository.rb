@@ -1,5 +1,6 @@
 require 'safeguard/hasher'
 require 'safeguard/repository/hash_table'
+require 'safeguard/verifier'
 require 'fileutils'
 require 'ribbon'
 require 'ribbon/core_ext'
@@ -69,11 +70,10 @@ module Safeguard
       Hasher.new *hash_table.files, :functions => functions
     end
 
-    # Verifies whether or not the file still matches the original version.
-    #
-    # An exception will be raised if the given file isn't in the repository.
-    def verify(filename)
-      hash_table.verify filename
+    # Creates a verifier using this repository's hash table.
+    def create_verifier_with(*args)
+      ribbon = args.extract_wrapped_ribbon!
+      Verifier.new *args, ribbon.merge!(hash_table: hash_table)
     end
 
     # Verifies all files present in this repository, and returns a hash of
