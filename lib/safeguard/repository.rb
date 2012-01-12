@@ -82,15 +82,6 @@ module Safeguard
       create_verifier_with(*args).results
     end
 
-    # Verifies all files present in this repository, and returns a hash of
-    # results associating a filename with either +true+, when the file is the
-    # same as the original version, or +false+, when otherwise.
-    #
-    # If a block is given, the filename and the result will be yielded.
-    def verify_all(&block)
-      hash_table.verify_all &block
-    end
-
     # Returns the path to the repository relative to the given +dir+.
     def self.directory_in(dir)
       File.join File.expand_path(dir), DIRECTORY_NAME
