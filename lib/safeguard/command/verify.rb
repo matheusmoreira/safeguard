@@ -15,24 +15,17 @@ module Safeguard
       # Repository in the current directory.
       action do |options, args|
         repo = Repository.new options.dir
-        if args.empty?
-          repo.verify_all do |filename, result|
-            display_result filename, result
-          end
-        else
-          args.each do |filename|
-            begin
-              result = repo.verify filename
-              display_result filename, result
-             rescue => e
-              puts e.message
-             end
+        functions = options.functions
+        results = repo.verify_files *args, functions: functions
+        results.keys.each do |file|
+          puts "#{file}:"
+          results[file].keys.each do |function|
+            value = results[file][function]
+            value = "File not in repository" if value == :file_missing
+            value = "Hash not in repository" if value == :hash_missing
+            puts "\t#{function} => #{value}"
           end
         end
-      end
-
-      def self.display_result(filename, result)
-        puts "#{filename} => #{result ? 'OK' : 'Mismatch'}"
       end
 
     end
