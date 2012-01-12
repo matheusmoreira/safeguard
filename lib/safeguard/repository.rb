@@ -52,8 +52,8 @@ module Safeguard
       save_hash_table
     end
 
-    # Calculates the checksum of the given files and stores the results. The
-    # given +args+ should be able to initialize a new hasher.
+    # Calculates the checksum of the given files and stores the results. +args+
+    # will be used to instantiate a new Hasher.
     def add_files!(*args)
       ribbon = args.extract_ribbon!
       hasher = Hasher.new *args, ribbon
