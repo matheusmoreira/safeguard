@@ -27,9 +27,9 @@ module Safeguard
       end
 
       # Merges this hash table's data with the other's.
-      def merge!(other, &block)
-        other = other.table if other.is_a? HashTable
-        Ribbon.merge! table, other, &block
+      def merge!(other)
+        other = other.ribbon if other.is_a? HashTable
+        Ribbon.deep_merge! ribbon, other
       end
 
       # Looks up the checksum data for the given +filename+.
