@@ -74,6 +74,9 @@ module Safeguard
       # associated hashes.
       def ribbon
         (@ribbon ||= Ribbon::Wrapper.new).tap do |ribbon|
+          # TODO: Possible bottleneck here. #wrap_all! is a recursive call.
+          # Keep its usage localized instead of calling it on every access?
+          # Once after every modification, perhaps?
           ribbon.wrap_all!
         end
       end
