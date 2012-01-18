@@ -57,7 +57,9 @@ module Safeguard
       # The underlying wrapped ribbon used to store filenames and their
       # associated hashes.
       def ribbon
-        @ribbon ||= Ribbon::Wrapper.new
+        (@ribbon ||= Ribbon::Wrapper.new).tap do |ribbon|
+          ribbon.wrap_all!
+        end
       end
 
     end
