@@ -60,7 +60,7 @@ module Safeguard
     # recalculated. To force that, call with <tt>:force => true</tt>.
     def hash_and_add!(*args)
       ribbon = args.extract_ribbon!
-      hasher = Hasher.new *args, ribbon
+      hasher = Hasher.new *args, functions: ribbon.functions?
       hasher.files.delete_if do |file|
         hash_table.files.include? file
       end unless ribbon.force?
