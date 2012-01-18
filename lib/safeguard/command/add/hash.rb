@@ -10,9 +10,11 @@ module Safeguard
         opt :force, 'Rehash files that are already in the repository'
 
         when_called do |options, files|
-          repo = Repository.new options.dir
-          repo.before_save do
-            repo.hash_and_add! *files, functions: options.functions?([]), force: options.force?
+          Repository.new(options.dir).before_save do |repo|
+            repo.hash_and_add! *files, functions: options.functions?([]),
+                                       force: options.force?,
+                                       before_hashing: method(:before_hashing),
+                                       after_hashing: method(:after_hashing)
           end
         end
 
