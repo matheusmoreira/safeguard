@@ -55,6 +55,9 @@ module Safeguard
 
     # Calculates the checksum of the given files and stores the results. +args+
     # will be used to instantiate a new Hasher.
+    #
+    # By default, the hashes of files already in the repository will not be
+    # recalculated. To force that, call with <tt>:force => true</tt>.
     def add_files!(*args)
       ribbon = args.extract_ribbon!
       hasher = Hasher.new *args, ribbon
