@@ -11,7 +11,7 @@ module Safeguard
     help
     version Acclaim::Version::STRING
 
-    opt :dir, '-D', '--dir', '--directory', 'Directory in which the repository is.',
+    opt :dir, '-D', '--directory', 'Directory in which the repository is.',
               default: Dir.pwd, arity: [1,0]
 
     action do |options, args|
