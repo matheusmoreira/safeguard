@@ -74,7 +74,7 @@ module Safeguard
     end
 
     # Creates a verifier using this repository's hash table.
-    def create_verifier_with(*args)
+    def create_verifier_for(*args)
       ribbon = args.extract_wrapped_ribbon!
       Verifier.new *args, ribbon.merge!(hash_table: hash_table)
     end
@@ -82,7 +82,7 @@ module Safeguard
     # Recalculates the checksum of the given files and compares them to the
     # stored values. +args+ will be used to instantiate a new Verifier.
     def verify_files(*args)
-      create_verifier_with(*args).results
+      create_verifier_for(*args).results
     end
 
     # Returns the path to the repository relative to the given +dir+.
