@@ -36,6 +36,13 @@ module Safeguard
         ribbon.ribbon[filename]
       end
 
+      # Adds a file to the hash table.
+      #
+      # The file will not have any hash information associated with it.
+      def add(filename)
+        self[filename]
+      end
+
       # Returns a list of files present in this hash table.
       def files
         ribbon.keys
