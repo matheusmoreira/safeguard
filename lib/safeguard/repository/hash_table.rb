@@ -59,6 +59,12 @@ module Safeguard
         files.include?(filename) and not self[filename].empty?
       end
 
+      # Returns whether the given file has a hash associated with the function
+      # stored.
+      def has_hash?(filename, function)
+        has_hashes?(filename) and self[filename].fetch function, nil
+      end
+
       # Returns a list of files present in this hash table.
       def files
         ribbon.keys
