@@ -1,11 +1,12 @@
 require 'safeguard/digest'
+require 'safeguard/worker'
 require 'ribbon'
 require 'ribbon/core_ext/array'
 
 module Safeguard
 
   # Hashes a set of files.
-  class Hasher
+  class Hasher < Worker
 
     # The files which will be hashed.
     attr_accessor :files
