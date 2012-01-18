@@ -16,6 +16,18 @@ module Safeguard
           end
         end
 
+        class << self
+
+          def before_hashing(file, function)
+            print "Hashing the file '#{file}' with #{function.to_s.upcase} "
+          end
+
+          def after_hashing(file, function, results)
+            puts " => #{results}"
+          end
+
+        end
+
       end
     end
   end
