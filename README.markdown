@@ -1,3 +1,3 @@
 # Safeguard
 
-## Hash-based file integrity verification utility
+Hash-based file integrity verification utility
