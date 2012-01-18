@@ -30,6 +30,8 @@ module Safeguard
       end
       self.functions = [*funcs]
       self.files = args
+      before_hashing &ribbon.before_hashing?
+      after_hashing &ribbon.after_hashing?
     end
 
     # Calculates the hash of each file. Updates the cached hash results.
