@@ -7,7 +7,18 @@ module Safeguard
   # Encapsulates checksum computation for files using a set of hash functions.
   module Digest
 
-    SUPPORTED_ALGORITHMS = %w(sha1 md5 crc32).map!(&:to_sym).freeze
+    algorithms = { sha1:  OpenSSL::Digest::SHA1,
+                   md5:   OpenSSL::Digest::MD5,
+                   crc32: Safeguard::Digest::CRC32 }.freeze
+
+    SUPPORTED_ALGORITHMS = algorithms.keys.freeze
+
+    # Define one method for every supported algorithm.
+    algorithms.each do |algorithm, digest_class|
+      define_singleton_method algorithm do |*args|
+        digest_with digest_class, *args
+      end
+    end
 
     # Digests a file using an +algorithm+.
     #
@@ -26,24 +37,6 @@ module Safeguard
     end
 
     private_class_method :digest_with
-
-    # Computes the SHA1 sum of the given file.
-    def self.sha1(*args)
-      digest_with OpenSSL::Digest::SHA1, *args
-    end
-
-    # Computes the MD5 sum of the given file.
-    def self.md5(*args)
-      digest_with OpenSSL::Digest::MD5, *args
-    end
-
-    # Computes the CRC32 sum of the given file.
-    def self.crc32(*args)
-      # Read file in binary mode. Doesn't make any difference in *nix, but Ruby
-      # will attempt to convert line endings if the file is opened in text mode
-      # in other platforms.
-      digest_with Safeguard::Digest::CRC32, *args
-    end
 
     # Digests a file using a hash function, which can be the symbol of any
     # Digest module method that takes a file. Uses SHA1 by default.
