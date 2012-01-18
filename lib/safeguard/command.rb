@@ -1,3 +1,4 @@
+require 'safeguard/digest'
 require 'safeguard/version'
 require 'acclaim/command'
 
@@ -16,6 +17,19 @@ module Safeguard
 
     action do |options, args|
       Init.execute options, args
+    end
+
+    # The class methods.
+    class << self
+
+      def add_supported_algorithms_as_options!
+        Digest::SUPPORTED_ALGORITHMS.each do |algorithm|
+          option algorithm, "Use #{algorithm.to_s.upcase}." do |options|
+            options.functions = (options.functions? []) << algorithm
+          end
+        end
+      end
+
     end
 
   end
