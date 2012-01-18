@@ -48,8 +48,10 @@ module Safeguard
       #
       #   Safeguard::Digest.md5(file)
       def file(file, hash_function = :sha1)
-        f = hash_function.to_sym
-        raise ArgumentError, "Unsupported hash function: #{f}" unless respond_to? f
+        hash_function = hash_function.to_sym
+        unless respond_to? hash_function
+          raise ArgumentError, "Unsupported hash function: #{hash_function}"
+        end
         send hash_function, file
       end
 
