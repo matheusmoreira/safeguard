@@ -39,8 +39,8 @@ module Safeguard
       # Adds a file to the hash table.
       #
       # The file will not have any hash information associated with it.
-      def add(filename)
-        self[filename]
+      def add(*filenames)
+        filenames.each { |filename| self[filename] }
       end
 
       # Same as #add, but returns +self+.
