@@ -15,6 +15,11 @@ module Safeguard
       Command.invoke(command, *args)
     end
 
+    # Returns the version of Safeguard.
+    def version
+      Version::STRING
+    end
+
   end
 
 end
