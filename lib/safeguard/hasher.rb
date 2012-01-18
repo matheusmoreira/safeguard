@@ -39,7 +39,9 @@ module Safeguard
       results = Ribbon.new
       files.each do |file|
         functions.each do |function|
-          results[file][function] = Safeguard::Digest.file file, function
+          call_callback before_hashing, file, function
+          results[file][function] = result = Safeguard::Digest.file file, function
+          call_callback after_hashing, file, function, result
         end
       end
       results = Ribbon[results]
