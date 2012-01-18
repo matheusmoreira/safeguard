@@ -68,7 +68,7 @@ module Safeguard
       funcs = ribbon.functions?
       hasher = Hasher.new *args, functions: funcs
       hasher.files.delete_if do |file|
-        hash_table.files.include? file
+        hasher.functions.any? { |function| hash_table.has_hash? file, function }
       end unless ribbon.force?
       results = hasher.results
       hash_table.merge! results
