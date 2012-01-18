@@ -1,10 +1,3 @@
-require 'safeguard/command'
-require 'safeguard/digest'
-require 'safeguard/hasher'
-require 'safeguard/repository'
-require 'safeguard/verifier'
-require 'safeguard/version'
-
 # Safeguard module.
 module Safeguard
 
@@ -23,3 +16,10 @@ module Safeguard
   end
 
 end
+
+require 'safeguard/command'
+require 'safeguard/digest'
+require 'safeguard/hasher'
+require 'safeguard/repository'
+require 'safeguard/verifier'
+require 'safeguard/version'
