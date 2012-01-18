@@ -43,6 +43,12 @@ module Safeguard
         self[filename]
       end
 
+      # Same as #add, but returns +self+.
+      def <<(filename)
+        add filename
+        self
+      end
+
       # Returns a list of files present in this hash table.
       def files
         ribbon.keys
