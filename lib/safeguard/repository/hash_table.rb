@@ -33,7 +33,7 @@ module Safeguard
 
       # Looks up the checksum data for the given +filename+.
       def [](filename)
-        ribbon[filename]
+        ribbon.ribbon[filename]
       end
 
       # Returns a list of files present in this hash table.
