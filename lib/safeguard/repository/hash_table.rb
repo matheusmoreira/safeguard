@@ -54,6 +54,11 @@ module Safeguard
         self
       end
 
+      # Returns whether the given file has any hash information associated.
+      def has_hashes?(filename, *functions)
+        files.include?(filename) and not self[filename].empty?
+      end
+
       # Returns a list of files present in this hash table.
       def files
         ribbon.keys
