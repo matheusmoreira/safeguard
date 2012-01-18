@@ -19,8 +19,7 @@ module Safeguard
       action do |options, files|
         repo = Repository.new options.dir
         repo.before_save do
-          repo.hash_and_add! *files, :functions => options.functions,
-                                     :force => options.force?
+          repo.hash_and_add! *files, functions: options.functions, force: options.force?
         end
       end
 
