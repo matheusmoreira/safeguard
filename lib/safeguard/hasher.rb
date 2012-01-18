@@ -14,6 +14,9 @@ module Safeguard
     # The hash functions to use.
     attr_accessor :functions
 
+    # Available callbacks.
+    has_callbacks :before_hashing, :after_hashing
+
     # Initializes a new hasher with the given files. Last argument can be an
     # options hash or ribbon which specifies the hash functions to use:
     #
