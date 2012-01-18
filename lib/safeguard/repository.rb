@@ -58,7 +58,7 @@ module Safeguard
     #
     # By default, the hashes of files already in the repository will not be
     # recalculated. To force that, call with <tt>:force => true</tt>.
-    def add_files!(*args)
+    def hash_and_add!(*args)
       ribbon = args.extract_ribbon!
       hasher = Hasher.new *args, ribbon
       hasher.files.delete_if do |file|

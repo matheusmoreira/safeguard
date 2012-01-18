@@ -16,11 +16,11 @@ module Safeguard
 
       # For every argument, try to add it to the Repository in the current
       # directory.
-      action do |options, args|
+      action do |options, files|
         repo = Repository.new options.dir
         repo.before_save do
-          repo.add_files! *args, :functions => options.functions,
-                                 :force => options.force?
+          repo.hash_and_add! *files, :functions => options.functions,
+                                     :force => options.force?
         end
       end
 
