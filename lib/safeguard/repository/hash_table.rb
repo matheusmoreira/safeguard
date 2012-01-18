@@ -31,6 +31,11 @@ module Safeguard
         ribbon.deep_merge! other, &block
       end
 
+      # Fetches a value. Same as Hash#fetch.
+      def fetch(*args, &block)
+        ribbon.fetch *args, &block
+      end
+
       # Looks up the checksum data for the given +filename+.
       def [](filename)
         ribbon.ribbon[filename]
