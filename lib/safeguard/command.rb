@@ -22,6 +22,17 @@ module Safeguard
     # The class methods.
     class << self
 
+      # An option will be made for every element in
+      # Digest::SUPPORTED_ALGORITHMS. They may be used together and always
+      # append to the function array, bound to the <tt>:functions</tt> key.
+      #
+      # However, due to the lack of a formally defined +functions+ option,
+      # the Acclaim option parser will not set that option to anything.
+      # Therefore, calling <tt>options.functions</tt> will return an empty
+      # ribbon if the user doesn't specify any functions on the command line.
+      #
+      # <tt>options.functions?</tt> should ALWAYS be called, preferably while
+      # providing an empty array as fallback.
       def add_supported_algorithms_as_options!
         Digest::SUPPORTED_ALGORITHMS.each do |algorithm|
           option algorithm, "Use #{algorithm.to_s.upcase}." do |options|
