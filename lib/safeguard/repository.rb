@@ -53,6 +53,11 @@ module Safeguard
       save_hash_table
     end
 
+    # Adds the given files to the repository.
+    def add!(*files)
+      hash_table.add *files
+    end
+
     # Calculates the checksum of the given files and stores the results. +args+
     # will be used to instantiate a new Hasher.
     #
