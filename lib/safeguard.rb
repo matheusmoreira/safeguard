@@ -8,9 +8,13 @@ require 'safeguard/version'
 # Safeguard module.
 module Safeguard
 
-  # Run a command by name with the given arguments.
-  def self.run(command, *args)
-    Command.invoke(command, *args)
+  class << self
+
+    # Run a command by name with the given arguments.
+    def run(command, *args)
+      Command.invoke(command, *args)
+    end
+
   end
 
 end
