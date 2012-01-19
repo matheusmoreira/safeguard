@@ -1,33 +1,30 @@
 require 'safeguard/command'
+require 'safeguard/output/terminal'
+require 'ribbon'
 
 module Safeguard
   class Command
 
     # Verifies the files present in a Repository.
+    #
+    #   # Verifies all files in repository using SHA1
+    #   $ safeguard verify --sha1
+    #
+    #   # Verifies all files ending in '.mp3' using CRC32
+    #   $ safeguard verify --crc32 *.mp3
     class Verify < Command
 
       add_supported_algorithms_as_options!
 
       # Verify the files passed as arguments using information from the
       # Repository in the current directory.
-      action do |options, args|
+      action do |options, files|
         repo = Repository.new options.dir
-        functions = options.functions
-        results = repo.verify_files *args, functions: functions,
-                                           before_verifying: method(:before_verifying),
-                                           after_verifying: method(:after_verifying)
-      end
-
-      class << self
-
-        def before_verifying(file, function)
-          print "Verifying file '#{file}'... "
-        end
-
-        def after_verifying(file, function, result)
-          puts result ? :OK : :Mismatch
-        end
-
+        functions = options.functions? []
+        verifier_options = Ribbon.new functions: functions
+        mappings = Output::Terminal.create_mappings_for :before_verifying, :after_verifying
+        Ribbon.merge! verifier_options, mappings
+        results = repo.verify_files *files, verifier_options
       end
 
     end

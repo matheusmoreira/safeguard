@@ -1,9 +1,14 @@
 require 'safeguard/command/add'
-require 'safeguard/digest'
+require 'safeguard/output/terminal'
+require 'ribbon'
 
 module Safeguard
   class Command
     class Add
+
+      # Hashes files and stores the result in the repository.
+      #
+      #   $ safeguard add hash --sha1 *.mp3
       class Hash < Add
 
         add_supported_algorithms_as_options!
@@ -11,23 +16,12 @@ module Safeguard
 
         when_called do |options, files|
           Repository.new(options.dir).before_save do |repo|
-            repo.hash_and_add! *files, functions: options.functions?([]),
-                                       force: options.force?,
-                                       before_hashing: method(:before_hashing),
-                                       after_hashing: method(:after_hashing)
+            functions = options.functions? []
+            hasher_options = Ribbon.new force: options.force?, functions: functions
+            mappings = Output::Terminal.create_mappings_for :before_hashing, :after_hashing
+            Ribbon.merge! hasher_options, mappings
+            repo.hash_and_add! *files, hasher_options
           end
-        end
-
-        class << self
-
-          def before_hashing(file, function)
-            print "Hashing the file '#{file}' with #{function.to_s.upcase} "
-          end
-
-          def after_hashing(file, function, results)
-            puts " => #{results}"
-          end
-
         end
 
       end
