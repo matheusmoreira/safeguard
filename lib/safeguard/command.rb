@@ -1,6 +1,7 @@
 require 'safeguard/digest'
 require 'safeguard/version'
 require 'acclaim/command'
+require 'i18n'
 
 module Safeguard
 
@@ -14,6 +15,11 @@ module Safeguard
 
     opt :dir, '-D', '--directory', 'Directory in which the repository is.',
               default: Dir.pwd, arity: [1,0]
+
+    opt :locale, Symbol, 'The locale to use for language & localization.',
+                  arity: [1,0] do |options, locale|
+      I18n.locale = locale.shift
+    end
 
     action do |options, args|
       Init.execute options, args
