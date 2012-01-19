@@ -17,22 +17,26 @@ module Safeguard
 
         # Prints a string before a file is verified without a new line.
         def before_verifying(file, function)
-          print translate(:before_verifying, file: file, function: function)
+          options = { file: file, function: function }
+          print translate(:before_verifying, preprocess(options))
         end
 
         # Prints a string before a file is hashed without a new line.
         def before_hashing(file, function)
-           print translate(:before_hashing, file: file, function: function)
+          options = { file: file, function: function }
+           print translate(:before_hashing, preprocess(options))
         end
 
         # Prints a string after a file is hashed with a new line.
-        def after_hashing(file, function, result)
-          puts translate(:after_hashing, file: file, function: function, result: result)
+        def after_hashing(file, function, hash)
+          options = { file: file, function: function, hash: hash }
+          puts translate(:after_hashing, preprocess(options))
         end
 
         # Prints a string after a file is verified with a new line.
         def after_verifying(file, function, result)
-          puts translate(:after_verifying, file: file, function: function, result: result)
+          options = { file: file, function: function, result: result }
+          puts translate(:after_verifying, preprocess(options))
         end
 
         # Creates an options ribbon containing containing mappings to this
