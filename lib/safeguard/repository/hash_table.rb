@@ -62,7 +62,7 @@ module Safeguard
 
       # Returns whether the given file has any hash information associated.
       def has_hashes?(filename, *functions)
-        files.include?(filename) and not self[filename].empty?
+        has_file?(filename) and not self[filename].empty?
       end
 
       # Returns whether the given file has a hash associated with the function
