@@ -6,3 +6,5 @@ en:
         before_hashing: "Hashing '%{file}' with %{function}..."
         after_hashing: ' %{hash}'
         after_verifying: ' %{result}'
+        hash_missing: 'Hash not in repository'
+        file_missing: 'File not in repository'
