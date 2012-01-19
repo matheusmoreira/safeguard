@@ -41,6 +41,7 @@ module Safeguard
       self.hasher = options.hasher? do
         Hasher.new *args, options
       end
+      initialize_callbacks_from options
     end
 
     # Uses the hasher to recalculate the hashes of the files using the specified
