@@ -13,15 +13,10 @@ module Safeguard
       action do |options, args|
         repo = Repository.new options.dir
         functions = options.functions
-        results = repo.verify_files *args, functions: functions
-        results.keys.each do |file|
-          puts "#{file}:"
-          results[file].keys.each do |function|
-            value = results[file][function]
-            value = "File not in repository" if value == :file_missing
-            value = "Hash not in repository" if value == :hash_missing
-            puts "\t#{function} => #{value}"
-          end
+        results = repo.verify_files *args, functions: functions,
+                                           before_verifying: method(:before_verifying),
+                                           after_verifying: method(:after_verifying)
+      end
 
       class << self
 
