@@ -1,6 +1,5 @@
 require 'safeguard/command'
 require 'safeguard/repository'
-require 'fileutils'
 
 module Safeguard
   class Command
