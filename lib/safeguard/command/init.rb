@@ -1,4 +1,5 @@
 require 'safeguard/command'
+require 'safeguard/output/terminal'
 require 'safeguard/repository'
 
 module Safeguard
@@ -16,7 +17,7 @@ module Safeguard
         dir = File.expand_path(args.pop || options.dir)
         repo = Repository.new(dir)
         repo.create_directory!
-        puts "Initialized safeguard repository in #{repo.dir}"
+        Output::Terminal.initialized_repository repo.dir
       end
 
     end
