@@ -18,6 +18,11 @@ module Safeguard
       File.expand_path '../..', __FILE__
     end
 
+    # Directory where translations are kept.
+    def i18n
+      File.join root, 'i18n'
+    end
+
   end
 
 end
