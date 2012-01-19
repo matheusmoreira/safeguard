@@ -11,6 +11,7 @@ module Safeguard
 
       # Initializes this hash table with the contents of the given Ribbon.
       def initialize(ribbon = nil, &block)
+        ribbon = ribbon.ribbon if self.class === ribbon
         merge! ribbon, &block if ribbon
       end
 
