@@ -4,8 +4,8 @@ module Safeguard
   class << self
 
     # Run a command by name with the given arguments.
-    def run(command, *args)
-      Command.invoke(command, *args)
+    def run(*args)
+      Command.run *args
     end
 
     # Returns the version of Safeguard.
