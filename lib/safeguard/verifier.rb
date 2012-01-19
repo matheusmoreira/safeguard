@@ -32,14 +32,14 @@ module Safeguard
     #   Verifier.new :functions => [ :crc32, :md5 ], :hash_table => table
     #   Verifier.new *files, :functions => :crc32, :hash_table => table
     def initialize(*args)
-      ribbon = args.extract_ribbon!
-      table = ribbon.hash_table? do
+      options = args.extract_ribbon!
+      table = options.hash_table? do
         raise ArgumentError, 'No hash table to verify against'
       end
       self.hash_table = Repository::HashTable.new table
       args = hash_table.files if args.empty?
-      self.hasher = ribbon.hasher? do
-        Hasher.new *args, ribbon
+      self.hasher = options.hasher? do
+        Hasher.new *args, options
       end
     end
 
