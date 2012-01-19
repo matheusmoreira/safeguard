@@ -7,6 +7,7 @@ module Safeguard
 
     # Run a command by name with the given arguments.
     def run(*args)
+      initialize_i18n
       Command.run *args
     end
 
