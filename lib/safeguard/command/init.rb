@@ -7,7 +7,7 @@ module Safeguard
 
     # Initializes a Repository in a given directory.
     #
-    #   $ safeguard init .
+    #   $ safeguard init
     class Init < Command
 
       # Initializes a Safeguard Repository in a directory, which is either the
