@@ -1,0 +1,11 @@
+pt:
+  safeguard:
+    output:
+      terminal:
+        before_verifying: "Verificando o %{function} de '%{file}'..."
+        before_hashing: "Calculando o %{function} de '%{file}'..."
+        after_hashing: ' %{hash}'
+        after_verifying: ' %{result}'
+        hash_missing: 'Hash não está presente no repositório'
+        file_missing: 'Arquivo não está presente no repositório'
+        initialized_repository: 'Repositório do safeguard inicializado em %{directory}'
