@@ -36,10 +36,8 @@ module Safeguard
       table = ribbon.hash_table? do
         raise ArgumentError, 'No hash table to verify against'
       end
-      table = table.ribbon if Repository::HashTable === table
-      self.hash_table = Ribbon[table]
-      hash_table.wrap_all!
-      args = hash_table.keys if args.empty?
+      self.hash_table = Repository::HashTable.new table
+      args = hash_table.files if args.empty?
       self.hasher = ribbon.hasher? do
         Hasher.new *args, ribbon
       end
@@ -57,8 +55,8 @@ module Safeguard
       hasher.each do |file, hash_data|
         hasher.functions.each do |function|
           call_callback before_verifying, file, function
-          results[file][function] = result = if hash_table.has_key? file
-            if hash_table[file].has_key? function
+          results[file][function] = result = if hash_table.has_file? file
+            if hash_table.has_hash? file, function
               hash_data[function] == hash_table[file][function]
             else
               :hash_missing
