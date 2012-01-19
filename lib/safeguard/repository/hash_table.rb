@@ -68,7 +68,7 @@ module Safeguard
       # Returns whether the given file has a hash associated with the function
       # stored.
       def has_hash?(filename, function)
-        has_hashes?(filename) and self[filename].fetch function, nil
+        has_file?(filename) and self[filename].fetch function, nil
       end
 
       # Returns a list of files present in this hash table.
