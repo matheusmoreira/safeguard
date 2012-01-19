@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 require 'safeguard'
 
-Safeguard::Command.run *ARGV
+Safeguard.run *ARGV
