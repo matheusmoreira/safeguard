@@ -1,3 +1,5 @@
+require 'ribbon'
+
 module Safeguard
 
   # Something that works behind the scenes, possibly talking to an user
@@ -32,6 +34,13 @@ module Safeguard
     # Calls the given callback, passing it the rest of the arguments.
     def call_callback(block, *args)
       block.call *args if block.respond_to? :call
+    end
+
+    def initialize_callbacks_from(options)
+      options = Ribbon.wrap options
+      self.class.callbacks.each do |callback|
+        send callback, &options.fetch(callback, nil)
+      end
     end
 
     private
