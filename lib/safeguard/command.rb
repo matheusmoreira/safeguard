@@ -48,6 +48,7 @@ module Safeguard
 end
 
 require 'safeguard/command/add'
+require 'safeguard/command/add/hash'
 require 'safeguard/command/hash'
 require 'safeguard/command/init'
 require 'safeguard/command/verify'
