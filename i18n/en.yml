@@ -8,4 +8,4 @@ en:
         after_verifying: ' %{result}'
         hash_missing: 'Hash not in repository'
         file_missing: 'File not in repository'
-        initialized_directory: 'Initialized safeguard repository in %{directory}'
+        initialized_repository: 'Initialized safeguard repository in %{directory}'
