@@ -1,5 +1,7 @@
 module Safeguard
   module CoreExt
+
+    # Ruby core extensions for the File class.
     module File
 
       # Default size of chunks in bytes. A megabyte is equal to 2^20 bytes, or
