@@ -30,6 +30,7 @@ module Safeguard
       end
       self.functions = [*funcs]
       self.files = args
+      initialize_callbacks_from options
     end
 
     # Calculates the hash of each file. Updates the cached hash results.
