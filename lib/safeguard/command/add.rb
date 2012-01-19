@@ -3,7 +3,9 @@ require 'safeguard/command'
 module Safeguard
   class Command
 
-    # Adds files to a Repository.
+    # Adds files to a Repository without hashing them.
+    #
+    #   $ safeguard add *.mp3
     class Add < Command
 
       # For every argument, add it to the Repository in the current directory.
