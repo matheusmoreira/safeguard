@@ -42,6 +42,7 @@ end
 require 'safeguard/command'
 require 'safeguard/digest'
 require 'safeguard/hasher'
+require 'safeguard/output'
 require 'safeguard/repository'
 require 'safeguard/verifier'
 require 'safeguard/version'
