@@ -25,7 +25,17 @@ module Safeguard
             value = "Hash not in repository" if value == :hash_missing
             puts "\t#{function} => #{value}"
           end
+
+      class << self
+
+        def before_verifying(file, function)
+          print "Verifying file '#{file}'... "
         end
+
+        def after_verifying(file, function, result)
+          puts result ? :OK : :Mismatch
+        end
+
       end
 
     end
