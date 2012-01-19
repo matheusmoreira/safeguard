@@ -31,7 +31,7 @@ module Safeguard
         end
 
         # Prints a string after a file is verified with a new line.
-        def after_verifying(file, function, results)
+        def after_verifying(file, function, result)
           puts translate(:after_verifying, file: file, function: function, result: result)
         end
 
