@@ -23,6 +23,11 @@ module Safeguard
       File.join root, 'i18n'
     end
 
+    # Array of translation files.
+    def translation_files
+      Dir[File.join(i18n, '*')]
+    end
+
   end
 
 end
