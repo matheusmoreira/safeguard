@@ -47,6 +47,11 @@ module Safeguard
           options
         end
 
+        def initialized_repository(directory)
+          options = { directory: directory }
+          puts translate(:initialized_repository, preprocess(options))
+        end
+
         private
 
         # Applies common preprocessing.
