@@ -1,0 +1,8 @@
+en:
+  safeguard:
+    output:
+      terminal:
+        before_verifiying: "Verifying '%{file}' with %{function}..."
+        before_hashing: "Hashing '%{file}' with %{function}..."
+        after_hashing: ' %{result}'
+        after_verifiying: ' %{result}'
