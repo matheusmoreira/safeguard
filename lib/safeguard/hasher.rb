@@ -24,14 +24,12 @@ module Safeguard
     #   Hasher.new *files, :functions => :sha1
     #   Hasher.new *files, :functions => [ :sha1, :md5, :crc32 ]
     def initialize(*args)
-      ribbon = args.extract_options_as_ribbon!
-      funcs = ribbon.functions? do
+      options = args.extract_ribbon!
+      funcs = options.functions? do
         raise ArgumentError, 'No hash functions specified'
       end
       self.functions = [*funcs]
       self.files = args
-      before_hashing &ribbon.before_hashing?
-      after_hashing &ribbon.after_hashing?
     end
 
     # Calculates the hash of each file. Updates the cached hash results.
