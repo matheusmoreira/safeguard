@@ -43,6 +43,19 @@ module Safeguard
           options
         end
 
+        private
+
+        # Applies common preprocessing.
+        def preprocess(options = {})
+          options[:function] &&= options[:function].to_s.upcase
+          options[:result] &&= case result = options[:result]
+            when false, nil then :Mismatch
+            when true then :OK
+            else translate result
+          end
+          options
+        end
+
       end
 
 
