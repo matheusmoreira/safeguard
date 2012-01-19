@@ -1,12 +1,13 @@
 require 'safeguard/hasher'
 require 'safeguard/repository/hash_table'
+require 'safeguard/worker'
 require 'ribbon'
 require 'ribbon/core_ext/array'
 
 module Safeguard
 
   # Rehashes a set of files and compares the results to the stored hashes.
-  class Verifier
+  class Verifier < Worker
 
     # The hasher used to calculate the checksum of the files.
     attr_accessor :hasher
