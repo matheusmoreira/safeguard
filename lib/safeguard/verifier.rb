@@ -56,7 +56,8 @@ module Safeguard
       results = Ribbon.new
       hasher.each do |file, hash_data|
         hasher.functions.each do |function|
-          results[file][function] = if hash_table.has_key? file
+          call_callback before_verifying, file, function
+          results[file][function] = result = if hash_table.has_key? file
             if hash_table[file].has_key? function
               hash_data[function] == hash_table[file][function]
             else
@@ -65,6 +66,7 @@ module Safeguard
           else
             :file_missing
           end
+          call_callback after_verifying, file, function, result
         end
       end
       results = Ribbon[results]
