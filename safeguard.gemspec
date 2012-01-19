@@ -19,6 +19,7 @@ Gem::Specification.new('safeguard') do |gem|
 
   gem.add_runtime_dependency 'acclaim'
   gem.add_runtime_dependency 'ribbon'
+  gem.add_runtime_dependency 'i18n'
 
   gem.add_development_dependency 'rookie'
 
