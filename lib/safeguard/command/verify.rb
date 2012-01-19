@@ -1,5 +1,6 @@
 require 'safeguard/command'
 require 'safeguard/output/terminal'
+require 'safeguard/repository'
 require 'ribbon'
 
 module Safeguard

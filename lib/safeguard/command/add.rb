@@ -1,4 +1,5 @@
 require 'safeguard/command'
+require 'safeguard/repository'
 
 module Safeguard
   class Command
