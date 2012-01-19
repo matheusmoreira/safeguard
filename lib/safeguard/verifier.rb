@@ -15,6 +15,9 @@ module Safeguard
     # Hash table to compare results against.
     attr_accessor :hash_table
 
+    # Available callbacks.
+    has_callbacks :before_verifying, :after_verifying
+
     # Initializes a new verifier with the given files. Last argument can be an
     # options hash or ribbon which specifies the hash table to verify against
     # and the Hasher to use. If a hasher isn't specified, a new one will be
