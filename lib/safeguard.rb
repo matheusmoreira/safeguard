@@ -1,3 +1,5 @@
+require 'i18n'
+
 # Safeguard module.
 module Safeguard
 
@@ -26,6 +28,10 @@ module Safeguard
     # Array of translation files.
     def translation_files
       Dir[File.join(i18n, '*')]
+    end
+
+    def initialize_i18n
+      I18n.load_path = translation_files
     end
 
   end
