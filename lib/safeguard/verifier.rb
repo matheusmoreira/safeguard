@@ -68,7 +68,7 @@ module Safeguard
           call_callback after_verifying, file, function, result
         end
       end
-      results = Ribbon[results]
+      results = Ribbon.wrap results
       results.wrap_all!
       @results = results
     end
@@ -83,7 +83,7 @@ module Safeguard
 
     # Yields file => comparison data pairs, or returns an enumerator.
     def each(&block)
-      Ribbon[results].each &block
+      Ribbon.wrap(results).each &block
     end
 
     include Enumerable
