@@ -1,3 +1,3 @@
 require 'rookie'
 
-Rookie::Tasks.new 'safeguard.gemspec'
+Rookie::Tasks.new('safeguard.gemspec').define_tasks!
