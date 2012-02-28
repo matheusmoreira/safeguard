@@ -47,6 +47,14 @@ module Safeguard
       Gem::Specification.load gemspec_file
     end
 
+    # Ensure the correct versions of all gems specified as dependencies in the
+    # gem specification are loaded.
+    def ensure_correct_versions
+      gemspec.dependencies.each do |dependency|
+        gem dependency.name, dependency.requirement if dependency.type == :runtime
+      end
+    end
+
   end
 
 end
