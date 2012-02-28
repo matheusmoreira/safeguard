@@ -43,6 +43,12 @@ module Safeguard
 
     private
 
+    # Loads all available translations.
+    def initialize_i18n
+      require 'i18n'
+      I18n.load_path = translation_files
+    end
+
     # The <tt>safeguard.gemspec</tt> file.
     def gemspec_file
       File.join root, '.gemspec'.prepend(name.downcase)
@@ -51,12 +57,6 @@ module Safeguard
     # Safeguard's Gem::Specification.
     def gemspec
       Gem::Specification.load gemspec_file
-    end
-
-    # Loads all available translations.
-    def initialize_i18n
-      require 'i18n'
-      I18n.load_path = translation_files
     end
 
     # Ensure the correct versions of all gems specified as dependencies in the
