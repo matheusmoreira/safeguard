@@ -19,6 +19,11 @@ module Safeguard
       File.expand_path '../..', __FILE__
     end
 
+    # Where the source code is located.
+    def lib
+      File.join root, 'lib'
+    end
+
     # Directory where translations are kept.
     def i18n
       File.join root, 'i18n'
