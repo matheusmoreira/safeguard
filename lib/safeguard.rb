@@ -35,6 +35,13 @@ module Safeguard
       I18n.load_path = translation_files
     end
 
+    private
+
+    # The <tt>safeguard.gemspec</tt> file.
+    def gemspec_file
+      File.join root, '.gemspec'.prepend(name.downcase)
+    end
+
   end
 
 end
