@@ -65,6 +65,15 @@ module Safeguard
       end
     end
 
+    # Safeguard's modules.
+    def modules
+      Dir[File.join lib, name.downcase, '*'].select do |file|
+        File.file? file
+      end.map do |file|
+        File.basename file, '.rb'
+      end
+    end
+
   end
 
 end
