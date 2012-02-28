@@ -31,6 +31,7 @@ module Safeguard
       Dir[File.join(i18n, '*')]
     end
 
+    # Loads all available translations.
     def initialize_i18n
       I18n.load_path = translation_files
     end
