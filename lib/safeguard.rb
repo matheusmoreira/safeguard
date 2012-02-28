@@ -6,6 +6,7 @@ module Safeguard
     # Run a command by name with the given arguments.
     def run(*args)
       initialize_i18n
+      require_modules
       Command.run *args
     end
 
@@ -84,12 +85,3 @@ module Safeguard
   end
 
 end
-
-require 'safeguard/command'
-require 'safeguard/digest'
-require 'safeguard/hasher'
-require 'safeguard/output'
-require 'safeguard/repository'
-require 'safeguard/verifier'
-require 'safeguard/version'
-require 'safeguard/worker'
