@@ -19,6 +19,11 @@ module Safeguard
       File.expand_path '../..', __FILE__
     end
 
+    # Where the binary files are located.
+    def bin
+      File.join root, 'bin'
+    end
+
     # Where the source code is located.
     def lib
       File.join root, 'lib'
