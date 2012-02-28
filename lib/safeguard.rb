@@ -74,6 +74,13 @@ module Safeguard
       end
     end
 
+    # Requires all Safeguard modules.
+    def require_modules
+      modules.each do |mod|
+        require "#{name.downcase}/#{mod}"
+      end
+    end
+
   end
 
 end
