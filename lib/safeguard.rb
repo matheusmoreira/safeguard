@@ -42,6 +42,11 @@ module Safeguard
       File.join root, '.gemspec'.prepend(name.downcase)
     end
 
+    # Safeguard's Gem::Specification.
+    def gemspec
+      Gem::Specification.load gemspec_file
+    end
+
   end
 
 end
