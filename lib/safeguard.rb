@@ -1,5 +1,3 @@
-require 'i18n'
-
 # Safeguard module.
 module Safeguard
 
@@ -33,6 +31,7 @@ module Safeguard
 
     # Loads all available translations.
     def initialize_i18n
+      require 'i18n'
       I18n.load_path = translation_files
     end
 
