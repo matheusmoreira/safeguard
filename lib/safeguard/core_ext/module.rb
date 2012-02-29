@@ -5,7 +5,7 @@ module Safeguard
     module Module
 
       def translation_key(*args)
-        name.split('::').push(*args).map(&:to_s).map(&:downcase).join '.'
+        name.split('::').push(*args).map { |key| key.to_s.downcase }.join '.'
       end
 
     end
