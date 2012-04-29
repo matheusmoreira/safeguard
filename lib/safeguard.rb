@@ -5,8 +5,8 @@ module Safeguard
 
     # Run a command by name with the given arguments.
     def run(*args)
-      initialize_i18n
       ensure_correct_versions
+      initialize_i18n
       require_modules
       Command.run *args
     end
